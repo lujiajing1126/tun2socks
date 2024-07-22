@@ -11,7 +11,7 @@ import (
 // ErrProtocol indicates that parsing encountered an unknown protocol.
 var ErrProtocol = errors.New("proxy: unknown protocol")
 
-// A proxy holds a proxy's protocol and how to parse it.
+// A protocol holds a proxy protocol's name and how to parse it.
 type protocol struct {
 	name  string
 	parse func(*url.URL) (Proxy, error)
@@ -44,10 +44,9 @@ func pick(name string) protocol {
 	return protocol{}
 }
 
-// Parse parses a proxy url that has been encoded in a registered format.
-// The string returned is the format name used during format registration.
-// Format registration is typically done by an init function in the codec-
-// specific package.
+// Parse parses proxy *url.URL that holds the proxy info into Proxy.
+// Protocol registration is typically done by an init function in the
+// proxy-specific package.
 func Parse(proxyURL *url.URL) (Proxy, error) {
 	if proxyURL == nil {
 		return nil, errors.New("proxy: nil url")
@@ -62,7 +61,7 @@ func Parse(proxyURL *url.URL) (Proxy, error) {
 	return p.parse(proxyURL)
 }
 
-// ParseFromURL parses a
+// ParseFromURL parses url string that holds the proxy info into Proxy.
 func ParseFromURL(proxy string) (Proxy, error) {
 	proxyURL, err := url.Parse(proxy)
 	if err != nil {
