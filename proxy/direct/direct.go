@@ -18,7 +18,7 @@ const protocol = "direct"
 
 type Direct struct{ *base.Base }
 
-func New() *Direct { return &Direct{base.New(protocol, "")} }
+func New() *Direct { return &Direct{base.New("", protocol)} }
 
 func Parse(*url.URL) (proxy.Proxy, error) { return New(), nil }
 

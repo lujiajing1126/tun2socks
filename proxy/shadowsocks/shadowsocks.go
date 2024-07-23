@@ -39,7 +39,7 @@ func New(addr, method, password, obfsMode, obfsHost string) (*Shadowsocks, error
 	}
 
 	return &Shadowsocks{
-		Base:     base.New(protocol, addr),
+		Base:     base.New(addr, protocol),
 		cipher:   cipher,
 		obfsMode: obfsMode,
 		obfsHost: obfsHost,

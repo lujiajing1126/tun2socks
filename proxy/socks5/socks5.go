@@ -32,7 +32,7 @@ type Socks5 struct {
 
 func New(addr, user, pass string) (*Socks5, error) {
 	return &Socks5{
-		Base: base.New(protocol, addr),
+		Base: base.New(addr, protocol),
 		user: user,
 		pass: pass,
 		unix: len(addr) > 0 && addr[0] == '/',

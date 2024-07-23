@@ -2,6 +2,7 @@ package proxy
 
 import (
 	"errors"
+	"fmt"
 	"net/url"
 	"sync"
 
@@ -56,7 +57,7 @@ func Parse(proxyURL *url.URL) (Proxy, error) {
 	}
 	p := pick(proxyURL.Scheme)
 	if p.parse == nil {
-		return nil, ErrProtocol
+		return nil, fmt.Errorf("%w: %s", ErrProtocol, proxyURL.Scheme)
 	}
 	return p.parse(proxyURL)
 }

@@ -38,7 +38,7 @@ type Relay struct {
 
 func New(addr, user, pass string, noDelay bool) (*Relay, error) {
 	return &Relay{
-		Base:    base.New(protocol, addr),
+		Base:    base.New(addr, protocol),
 		user:    user,
 		pass:    pass,
 		noDelay: noDelay,

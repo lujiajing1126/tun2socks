@@ -31,7 +31,7 @@ type HTTP struct {
 
 func New(addr, user, pass string) (*HTTP, error) {
 	return &HTTP{
-		Base: base.New(protocol, addr),
+		Base: base.New(addr, protocol),
 		user: user,
 		pass: pass,
 	}, nil
