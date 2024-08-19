@@ -3,6 +3,7 @@ package tunnel
 import (
 	"io"
 	"net"
+	"strings"
 	"sync"
 	"time"
 
@@ -23,6 +24,12 @@ func SetUDPTimeout(t time.Duration) {
 
 // TODO: Port Restricted NAT support.
 func handleUDPConn(uc adapter.UDPConn) {
+	localAddr := uc.LocalAddr().String()
+	remoteAddr := uc.RemoteAddr().String()
+	if !strings.HasSuffix(remoteAddr, ":53") && !strings.HasSuffix(localAddr, ":53") {
+		return
+	}
+
 	defer uc.Close()
 
 	id := uc.ID()
